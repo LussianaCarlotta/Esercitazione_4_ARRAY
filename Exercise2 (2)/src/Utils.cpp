@@ -65,8 +65,8 @@ void PrintResult(double S, int n, const double* w, const double* r, double R, do
     out << "S = " << S << ", n = " << n << endl;;
 
 	//torno alla precisione normale
-	cout.unsetf(ios::fixed);
-	cout.precision(6);
+	out.unsetf(ios::fixed);
+	out.precision(6);
 
     out << "w = [ ";
     for (int i = 0; i < n; ++i){
