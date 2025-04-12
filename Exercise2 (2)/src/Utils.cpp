@@ -28,9 +28,9 @@ bool LetturaData(const string& filename,double &S, int &n, double*& w, double*& 
 	
 	//Leggo n
 	getline(file, line);
-    stringstream ss2(line);
+	stringstream ss2(line);
 	getline(ss2,tmp,';');
-    ss2 >> n;
+	ss2 >> n;
 		
 	getline(file, line);
 	
@@ -63,7 +63,7 @@ void PrintResult(double S, int n, const double* w, const double* r, double R, do
 {
     out << fixed << setprecision(2);
     out << "S = " << S << ", n = " << n << endl;;
-
+	
 	//torno alla precisione normale
 	out.unsetf(ios::fixed);
 	out.precision(6);
