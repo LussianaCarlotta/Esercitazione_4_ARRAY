@@ -7,7 +7,7 @@ using namespace std;
 
 int main() {
     double S;
-    int n;
+    size_t n;
     double *w;
 	double *r;
 
@@ -20,11 +20,11 @@ int main() {
     double R = RateReturn(w, r, n);
 	
 	// Calcolo del valore finale dell'intero portafoglio
-    double FinalValue = (1 + R) * S;
+    double V = (1 + R) * S;
 
 
     // OUTPUT SU SCHERMO
-	PrintResult(S, n, w, r, R, FinalValue, cout);
+	PrintResult(S, n, w, r, R, V, cout);
 
 
     // OUTPUT SU FILE 
@@ -34,11 +34,8 @@ int main() {
         cerr << "Errore nell'apertura di result.txt" << endl;
         return 1;
     }
-    PrintResult(S, n, w, r, R, FinalValue, OutputFile);
+    PrintResult(S, n, w, r, R, V, OutputFile);
     OutputFile.close();
-	
-	delete[] w;
-	delete[] r;
 	
     return 0;
 }

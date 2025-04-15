@@ -8,7 +8,7 @@
 using namespace std;
 
 //Funzione che legge data.txt
-bool LetturaData(const string& filename,double &S, int &n, double*& w, double*& r)
+bool LetturaData(const string& filename, double &S, size_t &n, double*& w, double*& r)
 {
 	ifstream file(filename);
     if(file.fail()) 
@@ -38,20 +38,21 @@ bool LetturaData(const string& filename,double &S, int &n, double*& w, double*& 
 	w = new  double[n];
 	r = new  double [n];
 	
-	for (int i = 0; i < n; ++i)
+	for (size_t i = 0; i < n; i++)
 	{		
 		char separatore;
         file >> w[i] >> separatore >> r[i];
 	}
 	file.close();
+	
 	return true;
 }
 
 // Funzione che calcola il tasso di rendimento 
-double RateReturn(const double* w, const double* r, int n) 
+double RateReturn(const double* w, const double* r, size_t &n) 
 {
     double sum = 0.0;
-    for (int i = 0; i < n; ++i) 
+    for (size_t i = 0; i < n; i++) 
 	{
         sum += w[i] * r[i];
     }
@@ -59,30 +60,28 @@ double RateReturn(const double* w, const double* r, int n)
 }
 
 //Stampa dei risultati 
-void PrintResult(double S, int n, const double* w, const double* r, double R, double FinalValue, ostream& out) 
+void PrintResult(double &S, size_t &n, const double* const &w, const double* const &r, double &R, double &V, ostream& out)
 {
-    out << fixed << setprecision(2);
-    out << "S = " << S << ", n = " << n << endl;;
-	
-	//torno alla precisione normale
-	out.unsetf(ios::fixed);
-	out.precision(6);
+	out << "S = " << fixed << setprecision(2) << S << ", n = " << n << endl;
 
+	//torno alla precisione normale
+	out << std::defaultfloat;
+	
     out << "w = [ ";
-    for (int i = 0; i < n; ++i){
+    for (size_t i = 0; i < n; i++)
+	{
         out << w[i] << " ";
 	}
     out << "] " <<endl;
 
     out << "r = [ ";
-    for (int i = 0; i < n; ++i){
+    for (size_t i = 0; i < n; i++)
+	{
         out << r[i] << " ";
 	}
     out << "] " << endl;
 
-    out << setprecision(4);
-    out << "Rate of return of the portfolio: " << R << endl;
+    out << "Rate of return of the portfolio: " << fixed << setprecision(4) << R << endl;
 
-    out << fixed << setprecision(2);
-    out << "V: " << FinalValue << endl;
+    out << "V: " << fixed << setprecision(2) << V << endl;
 }
